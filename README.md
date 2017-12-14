@@ -9,5 +9,5 @@ This project use Graphcool as a backend service
 
 ## todos
 
-Aplly authentication
 Define graphql types for game book authors
+Fix window.reload in auth
