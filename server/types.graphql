@@ -14,4 +14,27 @@ type User @model {
 
   # custom fields
   name: String!
+
+  books: [Book!]! @relation(name: "UserBooks")
+
+  # the current book
+  selected: Book @relation(name: "SelectedBook")
+}
+
+type Book @model {
+  # Required system field:
+  id: ID! @isUnique # read-only (managed by Graphcool)
+
+  # Optional system fields (remove if not needed):
+  createdAt: DateTime! # read-only (managed by Graphcool)
+  updatedAt: DateTime! # read-only (managed by Graphcool)
+
+  title: String! # book title
+
+  description: String # optional book description
+  imageUrl: String # optional book imageUrl
+
+  author: User @relation(name: "UserBooks")
+
+  selectedByAuthor: User @relation(name: "SelectedBook")
 }

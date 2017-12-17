@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import CreateUser from './components/sign/CreateUser'
 import LoginUser from './components/sign/LoginUser'
+import CreateBook from './components/books/CreateBook'
+import ListBook from './components/books/ListBook'
 
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -40,6 +42,8 @@ class App extends Component {
           <div>
             <p>Logged in as {this.props.data.loggedInUser.name}</p>
             <button onClick={this._logout}>Log out</button>
+            <CreateBook loggedInUser={this.props.data.loggedInUser} />
+            <ListBook loggedInUser={this.props.data.loggedInUser} />
           </div>
         ) : (
           <div>
