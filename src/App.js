@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { Route } from 'react-router-dom'
 
 import { withApollo, graphql } from 'react-apollo'
 import gql from 'graphql-tag'

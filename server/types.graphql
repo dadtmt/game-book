@@ -17,8 +17,6 @@ type User @model {
 
   books: [Book!]! @relation(name: "UserBooks")
 
-  # the current book
-  selected: Book @relation(name: "SelectedBook")
 }
 
 type Book @model {
@@ -35,6 +33,4 @@ type Book @model {
   imageUrl: String # optional book imageUrl
 
   author: User @relation(name: "UserBooks")
-
-  selectedByAuthor: User @relation(name: "SelectedBook")
 }

@@ -32,7 +32,7 @@ class CreateBook extends React.Component {
           onChange={(e) => this.setState({imageUrl: e.target.value})}
         />
         {this.state.imageUrl &&
-          <img src={this.state.imageUrl} role='presentation'/>
+          <img src={this.state.imageUrl} alt="current"/>
         }
         <button onClick={this.handleCreateBook}>New Book</button>
       </div>
