@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { graphql } from 'react-apollo'
+import { graphql, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class LoginUser extends React.Component {
@@ -41,7 +41,7 @@ class LoginUser extends React.Component {
     try {
       const response = await this.props.authenticateUserMutation({variables: { email, password }})
       localStorage.setItem('graphcoolToken', response.data.authenticateUser.token)
-      window.location.reload()
+      this.props.client.resetStore()
     } catch (e) {
       console.error('An error occurred: ', e)
     }
@@ -58,4 +58,4 @@ const AUTHENTICATE_EMAIL_USER = gql`
   }
 `
 
-export default graphql(AUTHENTICATE_EMAIL_USER, {name: 'authenticateUserMutation'})(LoginUser)
+export default withApollo(graphql(AUTHENTICATE_EMAIL_USER, {name: 'authenticateUserMutation'})(LoginUser))

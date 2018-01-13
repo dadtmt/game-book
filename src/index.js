@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
@@ -9,6 +10,7 @@ import { ApolloProvider } from 'react-apollo'
 
 import './index.css';
 import App from './App';
+import EditBook from './components/books/EditBook'
 import registerServiceWorker from './registerServiceWorker';
 
 const httpLink = createHttpLink({ uri: process.env.REACT_APP_GRAPHCOOL_ENDPOINT });
@@ -27,7 +29,14 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}><App /></ApolloProvider>,
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/' component={App} />
+        <Route path='/book/:id' component={EditBook} />
+      </Switch>
+    </BrowserRouter>
+  </ApolloProvider>,
   document.getElementById('root')
 );
 registerServiceWorker();

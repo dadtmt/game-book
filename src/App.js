@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router'
+import { Route } from 'react-router-dom'
+
+import { withApollo, graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import CreateUser from './components/sign/CreateUser'
 import LoginUser from './components/sign/LoginUser'
 import CreateBook from './components/books/CreateBook'
 import ListBook from './components/books/ListBook'
-
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import logo from './logo.svg';
 import './App.css';
@@ -14,9 +16,9 @@ import './App.css';
 class App extends Component {
 
   _logout = () => {
-    // remove token from local storage and reload page to reset apollo client
+    // remove token from local storage and reset apollo client
     localStorage.removeItem('graphcoolToken')
-    window.location.reload()
+    this.props.client.resetStore()
   }
 
   _isLoggedIn = () => {
@@ -43,6 +45,7 @@ class App extends Component {
             <p>Logged in as {this.props.data.loggedInUser.name}</p>
             <button onClick={this._logout}>Log out</button>
             <CreateBook loggedInUser={this.props.data.loggedInUser} />
+            <p>or select an existing book</p>
             <ListBook loggedInUser={this.props.data.loggedInUser} />
           </div>
         ) : (
@@ -66,4 +69,4 @@ const LOGGED_IN_USER = gql`
   }
 `
 
-export default graphql(LOGGED_IN_USER, { options: {fetchPolicy: 'network-only'}})(App)
+export default withApollo(graphql(LOGGED_IN_USER, { options: {fetchPolicy: 'network-only'}})(withRouter(App)))

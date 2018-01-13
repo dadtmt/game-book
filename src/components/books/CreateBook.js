@@ -15,6 +15,7 @@ class CreateBook extends React.Component {
 
     return (
       <div>
+        <label>Create a new book: </label>
         <input
           value={this.state.title}
           placeholder='Title'
