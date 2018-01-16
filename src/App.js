@@ -9,10 +9,12 @@ import LoginUser from './components/sign/LoginUser'
 import CreateBook from './components/books/CreateBook'
 import ListBook from './components/books/ListBook'
 
+import withLoading from './hoc/withLoading'
+
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
 
   _logout = () => {
     // remove token from local storage and reset apollo client
@@ -25,10 +27,6 @@ class App extends Component {
   }
 
   render() {
-
-    if (this.props.data.loading) {
-      return (<div>Loading</div>)
-    }
 
     return (
       <div className="App">
@@ -68,4 +66,8 @@ const LOGGED_IN_USER = gql`
   }
 `
 
-export default withApollo(graphql(LOGGED_IN_USER, { options: {fetchPolicy: 'network-only'}})(withRouter(App)))
+export default withApollo(
+  graphql(
+    LOGGED_IN_USER,
+    { options: {fetchPolicy: 'network-only'}}
+  )(withRouter(withLoading(App))))

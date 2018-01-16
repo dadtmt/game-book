@@ -4,6 +4,8 @@ import SelectBook from './SelectBook'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
+import withLoading from '../../hoc/withLoading'
+
 const ListBook = ({data}) => {
   if (data.loading) {
     return (<div>Loading</div>)
@@ -39,4 +41,4 @@ export default graphql(
   {
     options: ({loggedInUser}) => ({ variables: { id: loggedInUser.id }})
   }
-)(ListBook)
+)(withLoading(ListBook))

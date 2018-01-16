@@ -3,13 +3,11 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
+import withLoading from '../../hoc/withLoading'
+
 class EditBook extends React.Component {
 
   render () {
-    if (this.props.data.loading) {
-      return (<div>Loading</div>)
-    }
-
     return (
       <div>
         Edit Book {this.props.match.params.id}
@@ -34,4 +32,4 @@ export default graphql(
   {
     options: ({match}) => ({ variables: { bookId: match.params.id }})
   }
-)(EditBook)
+)(withLoading(EditBook))
