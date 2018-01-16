@@ -11,11 +11,10 @@ import ListBook from './components/books/ListBook'
 
 import withLoading from './hoc/withLoading'
 
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+import './App.css'
 
 export class App extends Component {
-
   _logout = () => {
     // remove token from local storage and reset apollo client
     localStorage.removeItem('graphcoolToken')
@@ -23,21 +22,20 @@ export class App extends Component {
   }
 
   _isLoggedIn = () => {
-    return this.props.data.loggedInUser && this.props.data.loggedInUser.id !== ''
+    return (
+      this.props.data.loggedInUser && this.props.data.loggedInUser.id !== ''
+    )
   }
 
   render() {
-
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to GameBook</h1>
         </header>
-        <p className="App-intro">
-          Make GameBook great again
-        </p>
-        { this._isLoggedIn() ? (
+        <p className="App-intro">Make GameBook great again</p>
+        {this._isLoggedIn() ? (
           <div>
             <p>Logged in as {this.props.data.loggedInUser.name}</p>
             <button onClick={this._logout}>Log out</button>
@@ -53,7 +51,7 @@ export class App extends Component {
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -67,7 +65,7 @@ const LOGGED_IN_USER = gql`
 `
 
 export default withApollo(
-  graphql(
-    LOGGED_IN_USER,
-    { options: {fetchPolicy: 'network-only'}}
-  )(withRouter(withLoading(App))))
+  graphql(LOGGED_IN_USER, { options: { fetchPolicy: 'network-only' } })(
+    withRouter(withLoading(App))
+  )
+)

@@ -19,8 +19,7 @@ export default async (event: FunctionEvent<{}>) => {
     const api = graphcool.api('simple/v1')
 
     // get user by id
-    const user: User = await getUser(api, userId)
-      .then(r => r.User)
+    const user: User = await getUser(api, userId).then(r => r.User)
     console.log('user', user)
     // no logged in user
     if (!user || !user.id) {
@@ -45,7 +44,7 @@ async function getUser(api: GraphQLClient, id: string): Promise<{ User }> {
   `
 
   const variables = {
-    id,
+    id
   }
 
   return api.request<{ User }>(query, variables)

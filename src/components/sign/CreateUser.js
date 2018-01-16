@@ -4,7 +4,6 @@ import { graphql, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class CreateUser extends React.Component {
-
   constructor(props) {
     super()
 
@@ -15,30 +14,31 @@ class CreateUser extends React.Component {
     }
   }
 
-  render () {
-
+  render() {
     return (
       <div>
         <div>
           <input
             value={this.state.email}
-            placeholder='Email'
-            onChange={(e) => this.setState({email: e.target.value})}
+            placeholder="Email"
+            onChange={e => this.setState({ email: e.target.value })}
           />
           <input
-            type='password'
+            type="password"
             value={this.state.password}
-            placeholder='Password'
-            onChange={(e) => this.setState({password: e.target.value})}
+            placeholder="Password"
+            onChange={e => this.setState({ password: e.target.value })}
           />
           <input
             value={this.state.name}
-            placeholder='Name'
-            onChange={(e) => this.setState({name: e.target.value})}
+            placeholder="Name"
+            onChange={e => this.setState({ name: e.target.value })}
           />
-          {this.state.name && this.state.email && this.state.password &&
-          <button onClick={this.createUser}>Log in</button>
-          }
+          {this.state.name &&
+            this.state.email &&
+            this.state.password && (
+              <button onClick={this.createUser}>Log in</button>
+            )}
         </div>
       </div>
     )
@@ -48,17 +48,15 @@ class CreateUser extends React.Component {
     const { email, password, name } = this.state
 
     try {
-      const response = await this.props.signupUserMutation(
-        {variables: {email, password, name}}
-      )
+      const response = await this.props.signupUserMutation({
+        variables: { email, password, name }
+      })
       localStorage.setItem('graphcoolToken', response.data.signupUser.token)
       this.props.client.resetStore()
     } catch (e) {
       console.error('An error occurred: ', e)
     }
-
   }
-
 }
 
 const SIGNUP_EMAIL_USER = gql`
@@ -70,4 +68,6 @@ const SIGNUP_EMAIL_USER = gql`
   }
 `
 
-export default withApollo(graphql(SIGNUP_EMAIL_USER, {name: 'signupUserMutation'})(CreateUser))
+export default withApollo(
+  graphql(SIGNUP_EMAIL_USER, { name: 'signupUserMutation' })(CreateUser)
+)

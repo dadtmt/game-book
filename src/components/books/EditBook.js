@@ -6,8 +6,7 @@ import gql from 'graphql-tag'
 import withLoading from '../../hoc/withLoading'
 
 class EditBook extends React.Component {
-
-  render () {
+  render() {
     return (
       <div>
         Edit Book {this.props.match.params.id}
@@ -18,8 +17,8 @@ class EditBook extends React.Component {
 }
 
 const GET_BOOK = gql`
-  query GetBook($bookId: ID!){
-    Book(id: $bookId){
+  query GetBook($bookId: ID!) {
+    Book(id: $bookId) {
       title
       description
       imageUrl
@@ -27,9 +26,6 @@ const GET_BOOK = gql`
   }
 `
 
-export default graphql(
-  GET_BOOK,
-  {
-    options: ({match}) => ({ variables: { bookId: match.params.id }})
-  }
-)(withLoading(EditBook))
+export default graphql(GET_BOOK, {
+  options: ({ match }) => ({ variables: { bookId: match.params.id } })
+})(withLoading(EditBook))

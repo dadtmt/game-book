@@ -24,8 +24,7 @@ export default async (event: FunctionEvent<EventData>) => {
     const { email, password } = event.data
 
     // get user by email
-    const user: User = await getUserByEmail(api, email)
-      .then(r => r.User)
+    const user: User = await getUserByEmail(api, email).then(r => r.User)
 
     // no user with this email
     if (!user) {
@@ -41,14 +40,17 @@ export default async (event: FunctionEvent<EventData>) => {
     // generate node token for existing User node
     const token = await graphcool.generateNodeToken(user.id, 'User')
 
-    return { data: { id: user.id, token} }
+    return { data: { id: user.id, token } }
   } catch (e) {
     console.log(e)
     return { error: 'An unexpected error occured during authentication.' }
   }
 }
 
-async function getUserByEmail(api: GraphQLClient, email: string): Promise<{ User }> {
+async function getUserByEmail(
+  api: GraphQLClient,
+  email: string
+): Promise<{ User }> {
   const query = `
     query getUserByEmail($email: String!) {
       User(email: $email) {
@@ -59,7 +61,7 @@ async function getUserByEmail(api: GraphQLClient, email: string): Promise<{ User
   `
 
   const variables = {
-    email,
+    email
   }
 
   return api.request<{ User }>(query, variables)

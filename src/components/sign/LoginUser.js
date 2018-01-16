@@ -4,32 +4,31 @@ import { graphql, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class LoginUser extends React.Component {
-
   state = {
     email: '',
-    password: '',
+    password: ''
   }
 
-  render () {
-
+  render() {
     return (
       <div>
         <div>
           <input
             value={this.state.email}
-            placeholder='Email'
-            onChange={(e) => this.setState({email: e.target.value})}
+            placeholder="Email"
+            onChange={e => this.setState({ email: e.target.value })}
           />
           <input
-            type='password'
+            type="password"
             value={this.state.password}
-            placeholder='Password'
-            onChange={(e) => this.setState({password: e.target.value})}
+            placeholder="Password"
+            onChange={e => this.setState({ password: e.target.value })}
           />
 
-          {this.state.email && this.state.password &&
-          <button onClick={this.loginUser}>Log in</button>
-          }
+          {this.state.email &&
+            this.state.password && (
+              <button onClick={this.loginUser}>Log in</button>
+            )}
         </div>
       </div>
     )
@@ -39,15 +38,18 @@ class LoginUser extends React.Component {
     const { email, password } = this.state
 
     try {
-      const response = await this.props.authenticateUserMutation({variables: { email, password }})
-      localStorage.setItem('graphcoolToken', response.data.authenticateUser.token)
+      const response = await this.props.authenticateUserMutation({
+        variables: { email, password }
+      })
+      localStorage.setItem(
+        'graphcoolToken',
+        response.data.authenticateUser.token
+      )
       this.props.client.resetStore()
     } catch (e) {
       console.error('An error occurred: ', e)
     }
-
   }
-
 }
 
 const AUTHENTICATE_EMAIL_USER = gql`
@@ -58,4 +60,8 @@ const AUTHENTICATE_EMAIL_USER = gql`
   }
 `
 
-export default withApollo(graphql(AUTHENTICATE_EMAIL_USER, {name: 'authenticateUserMutation'})(LoginUser))
+export default withApollo(
+  graphql(AUTHENTICATE_EMAIL_USER, { name: 'authenticateUserMutation' })(
+    LoginUser
+  )
+)
