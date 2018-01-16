@@ -5,16 +5,12 @@ import gql from 'graphql-tag'
 
 import withLoading from '../../hoc/withLoading'
 
-class EditBook extends React.Component {
-  render() {
-    return (
-      <div>
-        Edit Book {this.props.match.params.id}
-        <h1>{this.props.data.Book.title}</h1>
-      </div>
-    )
-  }
-}
+const EditBook = ({ match, data }) => (
+  <div>
+    Edit Book {match.params.id}
+    <h1>{data.Book.title}</h1>
+  </div>
+)
 
 const GET_BOOK = gql`
   query GetBook($bookId: ID!) {
