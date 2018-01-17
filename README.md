@@ -3,7 +3,8 @@
 ## setup
 
 ```
-# /.env
+# /.env.local
+REACT_APP_GRAPHCOOL_ENDPOINT=GRAPHQL_endpoint
 ```
 
 ## Frontend
