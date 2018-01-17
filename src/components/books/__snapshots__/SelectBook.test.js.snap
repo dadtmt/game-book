@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectBook component component renders correctly 1`] = `
+<div>
+  <a
+    href="book/ID"
+    onClick={[Function]}
+  >
+    Select this book link
+  </a>
+  <h2>
+    Book Title
+  </h2>
+  <div
+    style={
+      Object {
+        "backgroundImage": "url(http://lorempixel.com/400/200/)",
+        "backgroundSize": "cover",
+        "paddingBottom": "100%",
+      }
+    }
+  />
+  <div>
+    Verum ad istam omnem orationem brevis est defensio. Nam quoad aetas M. Caeli dare potuit isti suspicioni locum, fuit primum ipsius pudore, deinde etiam patris diligentia disciplinaque munita. Qui ut huic virilem togam deditšnihil dicam hoc loco de me; tantum sit, quantum vos existimatis; hoc dicam, hunc a patre continuo ad me esse deductum; nemo hunc M. Caelium in illo aetatis flore vidit nisi aut cum patre aut mecum aut in M. Crassi castissima domo, cum artibus honestissimis erudiretur.
+     
+  </div>
+</div>
+`;

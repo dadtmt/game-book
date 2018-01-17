@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 
 import withLoading from '../../hoc/withLoading'
 
-const EditBook = ({ match, data }) => (
+export const EditBook = ({ match, data }) => (
   <div>
     Edit Book {match.params.id}
     <h1>{data.Book.title}</h1>

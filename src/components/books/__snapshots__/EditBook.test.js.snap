@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditBook component component renders correctly 1`] = `
+<div>
+  Edit Book 
+  ID
+  <h1>
+    Book Title
+  </h1>
+</div>
+`;

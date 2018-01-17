@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 
 import withLoading from '../../hoc/withLoading'
 
-const ListBook = ({ data }) => (
+export const ListBook = ({ data }) => (
   <ul>
     {data.User.books.map(book => (
       <li key={book.id}>
