@@ -1,13 +1,10 @@
-
 # added by email-password template: (please uncomment)
 type User @model {
   # Required system field:
   id: ID! @isUnique # read-only (managed by Graphcool)
-
   # Optional system fields (remove if not needed):
   createdAt: DateTime! # read-only (managed by Graphcool)
   updatedAt: DateTime! # read-only (managed by Graphcool)
-
   # template fields
   email: String! @isUnique
   password: String!
@@ -16,21 +13,32 @@ type User @model {
   name: String!
 
   books: [Book!]! @relation(name: "UserBooks")
-
 }
 
 type Book @model {
   # Required system field:
   id: ID! @isUnique # read-only (managed by Graphcool)
-
   # Optional system fields (remove if not needed):
   createdAt: DateTime! # read-only (managed by Graphcool)
   updatedAt: DateTime! # read-only (managed by Graphcool)
-
   title: String! # book title
-
   description: String # optional book description
   imageUrl: String # optional book imageUrl
-
+  # relations
+  pages: [Page!]! @relation(name: "BookPages")
+  firstPage: Page! @relation(name: "BookFirstPage")
   author: User @relation(name: "UserBooks")
+}
+
+type Page @model {
+  # Required system field:
+  id: ID! @isUnique # read-only (managed by Graphcool)
+  # Optional system fields (remove if not needed):
+  createdAt: DateTime! # read-only (managed by Graphcool)
+  updatedAt: DateTime! # read-only (managed by Graphcool)
+  title: String! # page title
+  description: String # optional book description
+  imageUrl: String # optional book imageUrl
+  book: Book @relation(name: "BookPages")
+  bookFirstPage: Book! @relation(name: "BookFirstPage")
 }

@@ -5,10 +5,15 @@ import gql from 'graphql-tag'
 
 import withLoading from '../../hoc/withLoading'
 
+import Page from './Page'
+
 export const EditBook = ({ match, data }) => (
   <div>
     Edit Book {match.params.id}
     <h1>{data.Book.title}</h1>
+    <div>
+      <Page {...data.Book.firstPage} />
+    </div>
   </div>
 )
 
@@ -18,6 +23,11 @@ const GET_BOOK = gql`
       title
       description
       imageUrl
+      firstPage {
+        title
+        description
+        imageUrl
+      }
     }
   }
 `
